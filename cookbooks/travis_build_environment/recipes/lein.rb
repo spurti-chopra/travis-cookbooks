@@ -10,6 +10,7 @@ bash 'run lein self-install' do
   code 'lein self-install'
   user node['travis_build_environment']['user']
   group node['travis_build_environment']['group']
+  not_if { File.exist?("#{node['travis_build_environment']['home']}/.lein/self-installs/leiningen-2.7.1-standalone.jar") }
   environment(
     'HOME' => node['travis_build_environment']['home']
   )
