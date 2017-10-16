@@ -81,6 +81,7 @@ mysql_user_passwords_sql_content = [
 
 if mysql_version < 5.7
   mysql_user_passwords_sql_content << "SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('')"
+elsif mysql_version == 5.7
   mysql_user_passwords_sql_content << "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root'; FLUSH PRIVILEGES;"
 end
 
