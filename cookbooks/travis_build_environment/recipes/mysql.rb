@@ -104,7 +104,7 @@ template "/etc/mysql/conf.d/performance-schema.cnf" do
 end
 
 template "/etc/mysql/mysql.conf.d/mysqld.cnf" do
-  source 'root/mysql.cnf.erb'
+  source 'root/mysqld.cnf.erb'
   owner 'root'
   group 'root'
   mode 0o640
