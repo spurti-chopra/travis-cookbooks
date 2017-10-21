@@ -93,22 +93,14 @@ template "/etc/mysql/conf.d/innodb_flush_log_at_trx_commit.cnf" do
   source 'root/innodb_flush_log_at_trx_commit.cnf.erb'
   owner 'root'
   group 'root'
-  mode 0o640
+  mode 0o644
 end
 
 template "/etc/mysql/conf.d/performance-schema.cnf" do
   source 'root/performance-schema.cnf.erb'
   owner 'root'
   group 'root'
-  mode 0o640
-end
-
-template "/etc/mysql/mysql.conf.d/mysqld.cnf" do
-  source 'root/mysqld.cnf.erb'
-  owner 'root'
-  group 'root'
-  mode 0o640
-  only_if { mysql_version == 5.7 }
+  mode 0o644
 end
 
 template "#{node['travis_build_environment']['home']}/.my.cnf" do
