@@ -103,6 +103,14 @@ template "/etc/mysql/conf.d/performance-schema.cnf" do
   mode 0o640
 end
 
+template "/etc/mysql/mysql.conf.d/mysqld.cnf" do
+  source 'root/mysql.cnf.erb'
+  owner 'root'
+  group 'root'
+  mode 0o640
+  only_if { mysql_version == 5.7 }
+end
+
 template "#{node['travis_build_environment']['home']}/.my.cnf" do
   source 'ci_user/dot_my.cnf.erb'
   user node['travis_build_environment']['user']
