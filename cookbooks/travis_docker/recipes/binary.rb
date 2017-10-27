@@ -27,3 +27,8 @@ ark 'docker' do
   strip_components 1
   has_binaries node['travis_docker']['binary']['binaries']
 end
+
+group 'docker' do
+  members node['travis_docker']['users']
+  action %i[create manage]
+end
