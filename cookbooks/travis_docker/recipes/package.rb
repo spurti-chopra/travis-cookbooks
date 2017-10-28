@@ -41,7 +41,7 @@ package 'docker-ce' do
 end
 
 group 'Adding users to group' do
-  group 'docker'
+  group_name 'docker'
   members node['travis_docker']['users']
   action %i[create manage]
 end
