@@ -27,3 +27,8 @@ ark 'docker' do
   strip_components 1
   has_binaries node['travis_docker']['binary']['binaries']
 end
+
+user node['travis_docker']['users'] do
+  group 'docker'
+  action :manage
+end
