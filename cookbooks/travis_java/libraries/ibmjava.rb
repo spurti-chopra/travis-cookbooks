@@ -10,7 +10,6 @@ module TravisJava
       java_home = ::File.join(node['travis_java']['jvm_base_dir'], node['travis_java'][attribute_key]['jvm_name'])
       pinned_release = node['travis_java'][attribute_key]['pinned_release']
       arch = node['travis_java']['arch']
-      arch = "x86_64" if arch == "amd64"
       index_yml = ::File.join("https://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/meta/sdk",
                               node['travis_java']['ibmjava']['platform'], arch, "index.yml")
 
