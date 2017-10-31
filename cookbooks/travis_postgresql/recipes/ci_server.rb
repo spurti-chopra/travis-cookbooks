@@ -9,10 +9,12 @@ end
 
 file '/lib/systemd/system/postgresql.service' do
   action :delete
+  notifies :run, 'execute[daemon-reload]', :immediately
+  only_if { node['lsb']['codename'] == 'xenial' }
 end
 
-systemd_unit 'postgresql.service' do
-  action :reload
+execute 'systemctl daemon-reload' do
+  action :nothing
   only_if { node['lsb']['codename'] == 'xenial' }
 end
 
