@@ -13,7 +13,7 @@ file '/lib/systemd/system/postgresql.service' do
   only_if { node['lsb']['codename'] == 'xenial' }
 end
 
-execute 'systemctl daemon-reload' do
+execute 'daemon-reload' do
   action :nothing
   only_if { node['lsb']['codename'] == 'xenial' }
 end
