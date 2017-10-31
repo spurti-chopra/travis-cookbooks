@@ -25,7 +25,7 @@ if !node['travis_postgresql']['superusers'].to_a.empty? && !::File.exist?(create
 end
 
 service 'postgresql' do
-  action :stop
+  action %i[stop disable]
 end
 
 template '/etc/init.d/postgresql' do
