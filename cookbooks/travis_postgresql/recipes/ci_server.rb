@@ -3,22 +3,6 @@ create_superusers_script = ::File.join(
   'postgresql_create_superusers.sql'
 )
 
-service 'postgresql' do
-  action :stop
-end
-
-file '/lib/systemd/system/postgresql.service' do
-  action :delete
-  notifies :run, 'execute[daemon-reload]', :immediately
-  only_if { node['lsb']['codename'] == 'xenial' }
-end
-
-execute 'daemon-reload' do
-  command "systemctl daemon-reload"
-  action :nothing
-  only_if { node['lsb']['codename'] == 'xenial' }
-end
-
 if !node['travis_postgresql']['superusers'].to_a.empty? && !::File.exist?(create_superusers_script)
   service 'postgresql' do
     action :start
@@ -69,4 +53,16 @@ Array(
     group 'postgres'
     mode 0o640 # apply same permissions as in 'pdpg' packages
   end
+end
+
+file '/lib/systemd/system/postgresql.service' do
+  action :delete
+  notifies :run, 'execute[daemon-reload]', :immediately
+  only_if { node['lsb']['codename'] == 'xenial' }
+end
+
+execute 'daemon-reload' do
+  command 'systemctl daemon-reload'
+  action :nothing
+  only_if { node['lsb']['codename'] == 'xenial' }
 end
