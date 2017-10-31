@@ -31,7 +31,7 @@ apt_repository 'pollinate' do
 end
 
 package 'pollinate' do
-  action %i[install upgrade]
+  action %i[install]
 end
 
 %w[
