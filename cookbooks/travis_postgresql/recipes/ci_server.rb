@@ -3,6 +3,10 @@ create_superusers_script = ::File.join(
   'postgresql_create_superusers.sql'
 )
 
+service 'postgresql' do
+  action :stop
+end
+
 file '/lib/systemd/system/postgresql.service' do
   action :delete
 end
