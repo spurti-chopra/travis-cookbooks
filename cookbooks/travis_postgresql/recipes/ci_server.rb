@@ -3,6 +3,15 @@ create_superusers_script = ::File.join(
   'postgresql_create_superusers.sql'
 )
 
+file '/lib/systemd/system/postgresql.service' do
+  action :delete
+end
+
+systemd_unit 'postgresql.service' do
+  action :reload
+  only_if { node['lsb']['codename'] == 'xenial' }
+end
+
 if !node['travis_postgresql']['superusers'].to_a.empty? && !::File.exist?(create_superusers_script)
   service 'postgresql' do
     action :start
