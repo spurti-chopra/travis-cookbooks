@@ -14,6 +14,7 @@ file '/lib/systemd/system/postgresql.service' do
 end
 
 execute 'daemon-reload' do
+  command "systemctl daemon-reload"
   action :nothing
   only_if { node['lsb']['codename'] == 'xenial' }
 end
