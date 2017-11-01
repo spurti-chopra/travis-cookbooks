@@ -49,7 +49,7 @@ package %w[
   wget
   zip
 ] do
-  action %i[install upgrade]
+  action %i[install]
 end
 
 execute 'rm -rf /etc/update-motd.d/*'
