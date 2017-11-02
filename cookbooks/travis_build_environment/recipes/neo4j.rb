@@ -11,6 +11,13 @@ ark 'neo4j' do
   strip_components 1
 end
 
+cookbook_file '/etc/polkit-1/localauthority/50-local.d/neo4j.pkla' do
+  source 'neo4j.pkla'
+  owner 'root'
+  group 'root'
+  mode  0o644
+end
+
 template '/etc/init.d/neo4j' do
   source 'etc-init.d-neo4j.sh.erb'
   owner node['travis_build_environment']['user']
