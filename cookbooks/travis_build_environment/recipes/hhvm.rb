@@ -1,16 +1,18 @@
 if node['kernel']['machine'] == 'ppc64le'
   hhvm_uri = 'http://ppa.launchpad.net/ibmpackages/hhvm/ubuntu'
   key = 'E7D1FA0C'
+  arch = 'ppc64le'
 else
   hhvm_uri = 'https://dl.hhvm.com/ubuntu'
   key = '0xB4112585D386EB94'
+  arch = 'amd64'
 end
 
 apt_repository 'hhvm-repository' do
   uri hhvm_uri
   distribution node['lsb']['codename']
   components ['main']
-  arch 'amd64'
+  arch arch
   keyserver 'keyserver.ubuntu.com'
   key key
   retries 2
