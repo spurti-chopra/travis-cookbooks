@@ -138,6 +138,7 @@ node['travis_build_environment']['pythons'].each do |py|
 
   node['travis_build_environment']['python_aliases'].fetch(py, []).concat(['default', py]).each do |name|
     packages.concat(node['travis_build_environment']['pip']['packages'].fetch(name, []))
+    puts packages
   end
 
   execute "install wheel in #{py}" do
@@ -150,6 +151,7 @@ node['travis_build_environment']['pythons'].each do |py|
   end
 
   execute "install packages in #{py}" do
+    puts "#{packages.join(' ')}"
     command "#{venv_fullname}/bin/pip install --upgrade #{packages.join(' ')}"
     user node['travis_build_environment']['user']
     group node['travis_build_environment']['group']
