@@ -140,7 +140,7 @@ node['travis_build_environment']['pythons'].each do |py|
   node['travis_build_environment']['python_aliases'].fetch(py, []).concat(['default', py]).each do |name|
     puts node['travis_build_environment']['python_aliases']
     puts name
-    #puts node['travis_build_environment']['pip']['packages']
+    node['travis_build_environment']['pip']['packages']
     puts "before our fetch"
     puts node['travis_build_environment']['pip']['packages'].fetch(name, [])
     puts "after our fetch"
