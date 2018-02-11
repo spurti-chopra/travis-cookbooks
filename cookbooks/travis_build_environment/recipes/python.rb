@@ -136,8 +136,11 @@ node['travis_build_environment']['pythons'].each do |py|
 
   packages = []
 
+  puts  node['travis_build_environment']['python_aliases']
   node['travis_build_environment']['python_aliases'].fetch(py, []).concat(['default', py]).each do |name|
     puts name
+    puts node['travis_build_environment']['pip']['packages']
+    puts node['travis_build_environment']['pip']['packages'].fetch(name, [])
     packages.concat(node['travis_build_environment']['pip']['packages'].fetch(name, []))
     puts "----------------------------------------------1"
     puts packages
