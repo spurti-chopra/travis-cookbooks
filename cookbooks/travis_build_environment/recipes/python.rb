@@ -138,18 +138,18 @@ node['travis_build_environment']['pythons'].each do |py|
 
   #puts  node['travis_build_environment']['python_aliases']
   node['travis_build_environment']['python_aliases'].fetch(py, []).concat(['default', py]).each do |name|
-    puts node['travis_build_environment']['python_aliases']
-    puts name
+    #puts node['travis_build_environment']['python_aliases']
+    #puts name
     node['travis_build_environment']['pip']['packages']
-    puts "before our fetch"
-    puts node['travis_build_environment']['pip']['packages'].fetch(name, [])
-    puts "after our fetch"
-    puts "before packages values"
-    puts packages
-    puts "before code fetch"
+    #puts "before our fetch"
+    #puts node['travis_build_environment']['pip']['packages'].fetch(name, [])
+    #puts "after our fetch"
+    #puts "before packages values"
+    #puts packages
+    #puts "before code fetch"
     packages.concat(node['travis_build_environment']['pip']['packages'].fetch(name, []))
-    puts "----------------------------------------------1"
-    puts "After fetch package values"
+    #puts "----------------------------------------------1"
+    puts "packages value at the end of iteration of py version #{name}"
     puts packages
   end
 
@@ -161,7 +161,8 @@ node['travis_build_environment']['pythons'].each do |py|
       'HOME' => node['travis_build_environment']['home']
     )
   end
-
+  puts "command ---------"
+  puts "#{venv_fullname}/bin/pip install --upgrade #{packages.join(' ')}"
   execute "install packages in #{py}" do
     command "#{venv_fullname}/bin/pip install --upgrade #{packages.join(' ')}"
     user node['travis_build_environment']['user']
